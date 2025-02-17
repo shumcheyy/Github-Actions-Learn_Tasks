@@ -1,0 +1,21 @@
+name: Run Hello.py from Repo with Matrix
+on: push
+
+jobs:
+    run_hello:
+        strategy:
+          matrix:
+            python_version: [python3.8, python3.9, python3.10]
+        runs-on: ubuntu-latest
+        steps:
+
+        - name: Checkout code
+          uses: actions/checkout@v4
+
+        - name: listing the dir
+          run: |
+            ls -ls
+            chmod 777 hello.py 
+
+        - name: Run python with version ${{ matrix.python_version }}
+          run:  ${{ matrix.python_version }} hello.py
